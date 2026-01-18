@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>📊 Dashboard</h2>
+
+<!-- ===== STATS GRID ===== -->
+<div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:20px;">
+
+    <div class="card">
+        <h3>Total Issues</h3>
+        <h1>{{ total }}</h1>
+    </div>
+
+    <div class="card">
+        <h3>To Do</h3>
+        <h1>{{ todo }}</h1>
+    </div>
+
+    <div class="card">
+        <h3>In Progress</h3>
+        <h1>{{ inprogress }}</h1>
+    </div>
+
+    <div class="card">
+        <h3>Done</h3>
+        <h1>{{ done }}</h1>
+    </div>
+
+</div>
+
+<br>
+
+<!-- ===== CHART CARD ===== -->
+<div class="card">
+    <h3>📈 Issue Status Overview</h3>
+    <canvas id="issueChart" height="120"></canvas>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const TODO = Number("{{ todo }}");
+const INPROGRESS = Number("{{ inprogress }}");
+const DONE = Number("{{ done }}");
+
+const ctx = document.getElementById("issueChart").getContext("2d");
+
+new Chart(ctx, {
+    type: "bar",
+    data: {
+        labels: ["To Do", "In Progress", "Done"],
+        datasets: [{
+            label: "Issues",
+            data: [TODO, INPROGRESS, DONE],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        }
+    }
+});
+</script>
+
+{% endblock %}

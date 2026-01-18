@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- PAGE HEADER -->
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+    <div>
+        <h2 style="margin:0;">Board</h2>
+        <div style="color:var(--text-muted); font-size:14px;">
+            Drag and drop issues between columns
+        </div>
+    </div>
+
+    <div>
+        <button onclick="location.href='/add'">+ Create Issue</button>
+    </div>
+</div>
+
+<!-- BOARD -->
+<div class="kanban">
+
+    <!-- TO DO -->
+    <div class="kanban-column" data-status="To Do">
+        <div class="kanban-column-header">
+            <div>TO DO <span>{{ todo|length }}</span></div>
+        </div>
+
+        {% for issue in todo %}
+        <div class="kanban-card" draggable="true" data-id="{{ issue.id }}">
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:4px;">#{{ issue.id }}</div>
+            <div style="font-weight:500;">{{ issue.description }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- IN PROGRESS -->
+    <div class="kanban-column" data-status="In Progress">
+        <div class="kanban-column-header">
+            <div>IN PROGRESS <span>{{ inprogress|length }}</span></div>
+        </div>
+
+        {% for issue in inprogress %}
+        <div class="kanban-card" draggable="true" data-id="{{ issue.id }}">
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:4px;">#{{ issue.id }}</div>
+            <div style="font-weight:500;">{{ issue.description }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- DONE -->
+    <div class="kanban-column" data-status="Done">
+        <div class="kanban-column-header">
+            <div>DONE <span>{{ done|length }}</span></div>
+        </div>
+
+        {% for issue in done %}
+        <div class="kanban-card" draggable="true" data-id="{{ issue.id }}">
+            <div style="font-size:12px; color:var(--text-muted); margin-bottom:4px;">#{{ issue.id }}</div>
+            <div style="font-weight:500;">{{ issue.description }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<!-- DRAG & DROP SCRIPT -->
+<script>
+let dragged = null;
+
+document.querySelectorAll(".kanban-card").forEach(card => {
+    card.addEventListener("dragstart", () => {
+        dragged = card;
+        setTimeout(() => card.style.opacity = "0.5", 0);
+    });
+
+    card.addEventListener("dragend", () => {
+        card.style.opacity = "1";
+    });
+
+    card.addEventListener("click", () => {
+        window.location = "/issue/" + card.dataset.id;
+    });
+});
+
+document.querySelectorAll(".kanban-column").forEach(col => {
+    col.addEventListener("dragover", e => e.preventDefault());
+
+    col.addEventListener("drop", () => {
+        if (!dragged) return;
+
+        const id = dragged.dataset.id;
+        const status = col.dataset.status;
+
+        fetch("/move/" + id + "/" + encodeURIComponent(status))
+            .then(() => location.reload());
+    });
+});
+</script>
+
+{% endblock %}

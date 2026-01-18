@@ -1,0 +1,254 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: radial-gradient(circle at top left, #eef2ff, #f8fafc, #ecfeff);
+    color: #020617;
+    animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+a { text-decoration: none; }
+
+/* ================= CONTAINER ================= */
+.container {
+    padding: 32px;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #020617, #020617);
+    color: white;
+    padding: 24px;
+    box-shadow: 8px 0 30px rgba(0,0,0,0.25);
+}
+
+.sidebar h3 {
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    color: #e5e7eb;
+    transition: 0.3s cubic-bezier(.2,.8,.2,1);
+    font-size: 15px;
+}
+
+.sidebar a:hover {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    transform: translateX(8px) scale(1.03);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+/* ================= TOPBAR ================= */
+.topbar {
+    background: rgba(2,6,23,0.75);
+    backdrop-filter: blur(18px);
+    color: white;
+    padding: 18px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* ================= GLASS CARD ================= */
+.card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(14px);
+    border-radius: 24px;
+    padding: 26px;
+    box-shadow: 
+        0 20px 50px rgba(0,0,0,0.15),
+        inset 0 0 0 1px rgba(255,255,255,0.5);
+    transition: 0.35s cubic-bezier(.2,.8,.2,1);
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 30px 80px rgba(0,0,0,0.25),
+        inset 0 0 0 1px rgba(255,255,255,0.6);
+}
+
+/* ================= DASHBOARD ================= */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+}
+
+.stat {
+    padding: 34px;
+    border-radius: 28px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+    transition: 0.4s cubic-bezier(.2,.8,.2,1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+    transform: translateX(-120%);
+}
+
+.stat:hover::after {
+    animation: shine 1s;
+}
+
+@keyframes shine {
+    to { transform: translateX(120%); }
+}
+
+.stat:hover {
+    transform: translateY(-12px) scale(1.08);
+}
+
+.stat.total { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+.stat.todo { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.stat.progress { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.stat.done { background: linear-gradient(135deg, #22c55e, #16a34a); }
+
+/* ================= TABLE ================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+}
+
+th {
+    background: linear-gradient(135deg, #020617, #020617);
+    color: white;
+    padding: 18px;
+}
+
+td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+tr {
+    transition: 0.25s;
+}
+
+tr:hover {
+    background: rgba(99,102,241,0.08);
+    transform: scale(1.01);
+}
+
+/* ================= KANBAN ================= */
+.kanban {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.kanban-column {
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(16px);
+    padding: 22px;
+    border-radius: 26px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.22);
+}
+
+.kanban-column h3 {
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+.kanban-card {
+    background: white;
+    padding: 18px;
+    margin-bottom: 16px;
+    border-radius: 18px;
+    cursor: grab;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    transition: 0.3s cubic-bezier(.2,.8,.2,1);
+}
+
+.kanban-card:hover {
+    transform: scale(1.08) rotate(0.6deg);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+}
+
+.kanban-card:active {
+    transform: scale(1.12) rotate(1deg);
+}
+
+/* ================= BUTTON ================= */
+button {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 14px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s cubic-bezier(.2,.8,.2,1);
+    box-shadow: 0 12px 30px rgba(79,70,229,0.5);
+}
+
+button:hover {
+    transform: translateY(-6px) scale(1.07);
+    box-shadow: 0 24px 50px rgba(79,70,229,0.7);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* ================= INPUT ================= */
+input, textarea, select {
+    width: 100%;
+    padding: 15px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.15);
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 6px rgba(79,70,229,0.25);
+}
+
+/* ================= IMAGES ================= */
+img {
+    border-radius: 16px;
+    transition: 0.35s cubic-bezier(.2,.8,.2,1);
+}
+
+img:hover {
+    transform: scale(1.15);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+}

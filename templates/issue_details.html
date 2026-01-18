@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+<h2>Issue #{{ issue.id }}</h2>
+
+<h3>{{ issue.description }}</h3>
+
+<p><b>Status:</b> {{ issue.status }}</p>
+<p><b>Priority:</b> {{ issue.priority }}</p>
+<p><b>Module:</b> {{ issue.module }}</p>
+<p><b>Sub Module:</b> {{ issue.sub_module }}</p>
+<p><b>Product:</b> {{ issue.product }}</p>
+
+<hr>
+
+<p><b>Resolution:</b></p>
+<p>{{ issue.resolution }}</p>
+
+<hr>
+
+<!-- ================= ATTACHMENTS DISPLAY FIRST ================= -->
+
+<h3>📎 Attachments</h3>
+
+{% if attachments %}
+    <div style="display:flex; gap:15px; flex-wrap:wrap;">
+        {% for a in attachments %}
+            <div style="border:1px solid #ddd; padding:8px; border-radius:8px;">
+                <img src="/static/uploads/{{ a.filename }}" 
+                     style="max-width:200px; max-height:200px; border-radius:6px;">
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p>No attachments yet.</p>
+{% endif %}
+
+<hr>
+
+<!-- ================= UPLOAD SECTION SEPARATE ================= -->
+
+<h4>⬆ Upload New Attachment</h4>
+
+<form method="post" action="/upload/{{ issue.id }}" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <br><br>
+    <button type="submit">Upload</button>
+</form>
+
+<hr>
+
+<!-- ================= COMMENTS ================= -->
+
+<h3>💬 Comments</h3>
+
+<form method="post" action="/add_comment/{{ issue.id }}">
+    <textarea name="comment" placeholder="Write a comment..." required style="width:100%; height:80px;"></textarea>
+    <br><br>
+    <button type="submit">Add Comment</button>
+</form>
+
+<br>
+
+{% if comments %}
+    {% for c in comments %}
+        <div style="padding:10px; border:1px solid #ddd; border-radius:6px; margin-bottom:10px;">
+            {{ c.comment }}<br>
+            <small style="color:gray">{{ c.created_at }}</small>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No comments yet.</p>
+{% endif %}
+
+<br>
+<a href="/board">← Back to Kanban</a>
+
+</div>
+
+{% endblock %}

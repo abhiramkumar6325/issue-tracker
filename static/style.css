@@ -1,0 +1,312 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* ================== THEME ================== */
+
+:root {
+    --bg-main: #F4F5F7;
+    --bg-panel: #FFFFFF;
+    --bg-soft: #F1F2F4;
+    --text-main: #172B4D;
+    --text-muted: #6B778C;
+    --border: #DFE1E6;
+    --primary: #0052CC;
+    --primary-dark: #0747A6;
+    --sidebar-bg: #0C1E3C;
+    --sidebar-hover: rgba(255,255,255,0.08);
+}
+
+body[data-theme="dark"] {
+    --bg-main: #0F1218;
+    --bg-panel: #161B22;
+    --bg-soft: #1F2630;
+    --text-main: #E6EDF3;
+    --text-muted: #9BA4AE;
+    --border: #2B3440;
+    --primary: #4C8DFF;
+    --primary-dark: #2F6FED;
+    --sidebar-bg: #0B1220;
+    --sidebar-hover: rgba(255,255,255,0.06);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+}
+
+/* ================== APP SHELL ================== */
+
+.app-shell {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    overflow: hidden;
+}
+
+/* ================== SIDEBAR ================== */
+
+.sidebar {
+    width: 260px;
+    background: var(--sidebar-bg);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.25s ease;
+    flex-shrink: 0;
+}
+
+.sidebar.collapsed {
+    width: 72px;
+}
+
+.sidebar-header {
+    height: 60px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.brand-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    font-size: 22px;
+}
+
+.brand-title {
+    font-weight: 700;
+}
+
+.brand-subtitle {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.collapse-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.sidebar-nav {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.nav-item:hover {
+    background: var(--sidebar-hover);
+}
+
+.nav-item.admin {
+    color: #FFD666;
+}
+
+.sidebar-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 10px 0;
+}
+
+.sidebar.collapsed .brand-text,
+.sidebar.collapsed .nav-text {
+    display: none;
+}
+
+/* ================== MAIN AREA ================== */
+
+.main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ================== TOPBAR ================== */
+
+.topbar {
+    height: 60px;
+    min-height: 60px;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    flex-shrink: 0;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-title {
+    font-weight: 600;
+}
+
+.topbar-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-form input {
+    width: 320px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-soft);
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.create-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================== CONTENT ================== */
+
+.content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: var(--bg-main);
+}
+
+/* ================== CARDS ================== */
+
+.card {
+    background: var(--bg-panel);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 16px;
+}
+
+/* ================== DASHBOARD ================== */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.stat-tile {
+    background: var(--bg-panel);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 16px;
+}
+
+/* ================== KANBAN ================== */
+
+.kanban {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+}
+
+.kanban-column {
+    background: var(--bg-soft);
+    border-radius: 12px;
+    min-width: 280px;
+    padding: 10px;
+}
+
+.kanban-card {
+    background: var(--bg-panel);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+/* ================== TABLE ================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-panel);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* ================== FORMS ================== */
+
+input, textarea, select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    width: 100%;
+}
+
+button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}

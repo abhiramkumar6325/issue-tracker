@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Issue Knowledge Base</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script defer src="/static/ui.js"></script>
+</head>
+<body data-theme="light">
+
+<div class="app-shell">
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-wrap">
+                <div class="logo">🧠</div>
+                <div class="brand-text">
+                    <div class="brand-title">Issue KB</div>
+                    <div class="brand-subtitle">Tracking</div>
+                </div>
+            </div>
+            <button class="collapse-btn" onclick="toggleSidebar()">☰</button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/dashboard" class="nav-item">📊 <span class="nav-text">Dashboard</span></a>
+            <a href="/board" class="nav-item">🗂 <span class="nav-text">Board</span></a>
+            <a href="/issues" class="nav-item">📋 <span class="nav-text">Issues</span></a>
+            <a href="/add" class="nav-item">➕ <span class="nav-text">Add Issue</span></a>
+            <a href="#" onclick="goMy()" class="nav-item">🧍 <span class="nav-text">My Issues</span></a>
+        </nav>
+    </aside>
+
+    <div class="main-area">
+
+        <header class="topbar">
+            <div class="topbar-left">
+                <div class="page-title">Issue Knowledge Base</div>
+            </div>
+
+            <div class="topbar-center">
+                <form action="/search" method="get" class="search-form">
+                    <input name="q" placeholder="Search issues...">
+                </form>
+            </div>
+
+            <div class="topbar-right">
+                <button class="icon-btn" onclick="toggleTheme()">🌗</button>
+                <button class="create-btn" onclick="location.href='/add'">+ Create</button>
+                <div class="avatar">A</div>
+            </div>
+        </header>
+
+        <main class="content-area">
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
+
+</div>
+
+<script>
+if(!localStorage.getItem("BID")){
+    localStorage.setItem("BID", crypto.randomUUID());
+}
+function goMy(){
+    location.href = "/my?bid=" + localStorage.getItem("BID");
+}
+</script>
+
+</body>
+</html>

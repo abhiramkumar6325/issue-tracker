@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+<h2>Add Issue</h2>
+
+<form method="post" enctype="multipart/form-data">
+
+    <label>Attachment:</label>
+    <input type="file" name="file">
+
+    <br><br>
+
+    <input name="sl_no" placeholder="Sl No" required>
+
+    <textarea name="description" placeholder="Problem Description" required></textarea>
+
+    <input name="module" placeholder="Module">
+
+    <input name="sub_module" placeholder="Sub Module">
+
+    <input name="product" placeholder="Product">
+
+    <textarea name="resolution" placeholder="Resolution"></textarea>
+
+    <select name="status" required>
+        <option value="">Select Status</option>
+        <option value="To Do">To Do</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Done">Done</option>
+    </select>
+
+    <select name="priority" required>
+        <option value="">Select Priority</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+    </select>
+
+    <!-- ✅ TAGS -->
+    <label>Tag:</label>
+    <select name="tags">
+        <option value="">None</option>
+        <option value="Bug">Bug</option>
+        <option value="Feature">Feature</option>
+        <option value="UI">UI</option>
+        <option value="Backend">Backend</option>
+        <option value="Performance">Performance</option>
+        <option value="Security">Security</option>
+    </select>
+
+    <input type="hidden" name="owner_browser_id" id="bid">
+
+    <br><br>
+    <button type="submit">Save Issue</button>
+
+</form>
+</div>
+
+<script>
+document.getElementById("bid").value = localStorage.getItem("BID");
+</script>
+{% endblock %}

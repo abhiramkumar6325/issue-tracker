@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+<h2>Edit Issue</h2>
+<form method="post">
+<input name="sl_no" value="{{issue.sl_no}}">
+<textarea name="description">{{issue.description}}</textarea>
+<input name="module" value="{{issue.module}}">
+<input name="sub_module" value="{{issue.sub_module}}">
+<input name="product" value="{{issue.product}}">
+<textarea name="resolution">{{issue.resolution}}</textarea>
+<button>Update Issue</button>
+</form>
+</div>
+{% endblock %}

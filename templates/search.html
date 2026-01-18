@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Search Results</h2>
+
+{% if q %}
+<p>Results for: <b>{{ q }}</b></p>
+{% endif %}
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Problem</th>
+    <th>Status</th>
+    <th>Priority</th>
+    <th>Module</th>
+    <th>Product</th>
+</tr>
+
+{% for r in rows %}
+<tr>
+    <td>{{ r.id }}</td>
+    <td><a href="/issue/{{ r.id }}">{{ r.description }}</a></td>
+    <td>{{ r.status }}</td>
+    <td>{{ r.priority }}</td>
+    <td>{{ r.module }}</td>
+    <td>{{ r.product }}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% if rows|length == 0 %}
+<p>No results found.</p>
+{% endif %}
+
+{% endblock %}
