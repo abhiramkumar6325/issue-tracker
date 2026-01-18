@@ -152,6 +152,13 @@ body {
 }
 
 /* ================== TOPBAR ================== */
+.mobile-menu-btn {
+    display: none;
+    font-size: 22px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
 
 .topbar {
     height: 60px;
@@ -355,4 +362,11 @@ button {
     .mobile-overlay.show {
         display: block;
     }
+    
 }
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+}
+
