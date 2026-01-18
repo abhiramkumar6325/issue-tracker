@@ -310,3 +310,49 @@ button {
     border-radius: 8px;
     cursor: pointer;
 }
+/* ================== MOBILE RESPONSIVE ================== */
+
+@media (max-width: 768px) {
+
+    /* Hide sidebar by default on mobile */
+    .sidebar {
+        position: fixed;
+        left: -260px;
+        top: 0;
+        bottom: 0;
+        z-index: 1000;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    /* Main area takes full width */
+    .main-area {
+        width: 100%;
+    }
+
+    /* Topbar center search smaller */
+    .search-form input {
+        width: 180px;
+    }
+
+    /* Hide text, keep icons */
+    .nav-text {
+        display: inline;
+    }
+
+    /* Add overlay when sidebar open */
+    .mobile-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 900;
+        display: none;
+    }
+
+    .mobile-overlay.show {
+        display: block;
+    }
+}

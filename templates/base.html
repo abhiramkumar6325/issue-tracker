@@ -4,10 +4,12 @@
     <title>Issue Knowledge Base</title>
     <link rel="stylesheet" href="/static/style.css">
     <script defer src="/static/ui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body data-theme="light">
 
 <div class="app-shell">
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebar()"></div>
 
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -64,6 +66,9 @@ if(!localStorage.getItem("BID")){
 }
 function goMy(){
     location.href = "/my?bid=" + localStorage.getItem("BID");
+}
+function closeSidebar() {
+    document.getElementById("sidebar").classList.remove("open");
 }
 </script>
 
