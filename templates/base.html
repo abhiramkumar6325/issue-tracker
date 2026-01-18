@@ -2,15 +2,18 @@
 <html>
 <head>
     <title>Issue Knowledge Base</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
     <script defer src="/static/ui.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body data-theme="light">
 
 <div class="app-shell">
-<div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebar()"></div>
 
+    <!-- Mobile overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebar()"></div>
+
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="brand-wrap">
@@ -32,14 +35,15 @@
         </nav>
     </aside>
 
+    <!-- MAIN -->
     <div class="main-area">
 
+        <!-- TOPBAR -->
         <header class="topbar">
             <div class="topbar-left">
-    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
-    <div class="page-title">Issue Knowledge Base</div>
-</div>
-
+                <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+                <div class="page-title">Issue Knowledge Base</div>
+            </div>
 
             <div class="topbar-center">
                 <form action="/search" method="get" class="search-form">
@@ -54,6 +58,7 @@
             </div>
         </header>
 
+        <!-- CONTENT -->
         <main class="content-area">
             {% block content %}{% endblock %}
         </main>
@@ -69,12 +74,12 @@ if(!localStorage.getItem("BID")){
 function goMy(){
     location.href = "/my?bid=" + localStorage.getItem("BID");
 }
-    function closeSidebar() {
-        document.getElementById("sidebar").classList.remove("open");
-        document.getElementById("mobileOverlay").classList.remove("show");
-    }
 
-
+function closeSidebar() {
+    document.getElementById("sidebar").classList.remove("open");
+    document.getElementById("mobileOverlay").classList.remove("show");
+}
 </script>
+
 </body>
 </html>
