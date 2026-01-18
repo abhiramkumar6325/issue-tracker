@@ -31,13 +31,16 @@ function setSidebarCollapsed(collapsed) {
 
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("mobileOverlay");
 
     if (window.innerWidth <= 768) {
         sidebar.classList.toggle("open");
+        overlay.classList.toggle("show");
     } else {
         sidebar.classList.toggle("collapsed");
     }
 }
+
 
 /* ================================
    INIT ON LOAD

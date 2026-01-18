@@ -1,78 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>📊 Dashboard</h2>
+<!-- PAGE HEADER -->
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <div>
+        <h2 style="margin:0;">Dashboard</h2>
+        <div style="color:var(--text-muted); font-size:14px;">
+            Overview of your workspace
+        </div>
+    </div>
+</div>
 
-<!-- ===== STATS GRID ===== -->
-<div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:20px;">
+<!-- STATS -->
+<div class="stat-grid">
 
-    <div class="card">
-        <h3>Total Issues</h3>
+    <div class="stat-tile">
+        <h4>Total Issues</h4>
         <h1>{{ total }}</h1>
     </div>
 
-    <div class="card">
-        <h3>To Do</h3>
+    <div class="stat-tile">
+        <h4>To Do</h4>
         <h1>{{ todo }}</h1>
     </div>
 
-    <div class="card">
-        <h3>In Progress</h3>
+    <div class="stat-tile">
+        <h4>In Progress</h4>
         <h1>{{ inprogress }}</h1>
     </div>
 
-    <div class="card">
-        <h3>Done</h3>
+    <div class="stat-tile">
+        <h4>Done</h4>
         <h1>{{ done }}</h1>
     </div>
 
 </div>
 
-<br>
+<!-- WELCOME PANEL -->
+<div style="margin-top:24px;" class="card">
+    <h3 style="margin-top:0;">Welcome back</h3>
+    <p style="color:var(--text-muted);">
+        This is your issue tracking workspace. Use the board to manage tasks, track progress, and collaborate efficiently.
+    </p>
 
-<!-- ===== CHART CARD ===== -->
-<div class="card">
-    <h3>📈 Issue Status Overview</h3>
-    <canvas id="issueChart" height="120"></canvas>
+    <div style="margin-top:16px; display:flex; gap:10px;">
+        <button onclick="location.href='/board'">Open Board</button>
+        <button onclick="location.href='/add'" style="background:var(--bg-soft); color:var(--text-main); border:1px solid var(--border);">
+            Create Issue
+        </button>
+    </div>
 </div>
-
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-const TODO = Number("{{ todo }}");
-const INPROGRESS = Number("{{ inprogress }}");
-const DONE = Number("{{ done }}");
-
-const ctx = document.getElementById("issueChart").getContext("2d");
-
-new Chart(ctx, {
-    type: "bar",
-    data: {
-        labels: ["To Do", "In Progress", "Done"],
-        datasets: [{
-            label: "Issues",
-            data: [TODO, INPROGRESS, DONE],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    stepSize: 1
-                }
-            }
-        }
-    }
-});
-</script>
 
 {% endblock %}

@@ -69,10 +69,12 @@ if(!localStorage.getItem("BID")){
 function goMy(){
     location.href = "/my?bid=" + localStorage.getItem("BID");
 }
-function closeSidebar() {
-    document.getElementById("sidebar").classList.remove("open");
-}
-</script>
+    function closeSidebar() {
+        document.getElementById("sidebar").classList.remove("open");
+        document.getElementById("mobileOverlay").classList.remove("show");
+    }
 
+
+</script>
 </body>
 </html>

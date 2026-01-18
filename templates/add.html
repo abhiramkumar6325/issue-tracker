@@ -1,62 +1,102 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="card">
-<h2>Add Issue</h2>
+
+<!-- PAGE HEADER -->
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+    <div>
+        <h2 style="margin:0;">Create Issue</h2>
+        <div style="color:var(--text-muted); font-size:14px;">
+            Add a new issue to the workspace
+        </div>
+    </div>
+</div>
 
 <form method="post" enctype="multipart/form-data">
 
-    <label>Attachment:</label>
-    <input type="file" name="file">
+<div style="display:grid; grid-template-columns: 1fr 320px; gap:20px;">
 
-    <br><br>
+    <!-- LEFT: MAIN FORM -->
+    <div>
 
-    <input name="sl_no" placeholder="Sl No" required>
+        <div class="card" style="margin-bottom:16px;">
+            <h3 style="margin-top:0;">Issue Details</h3>
 
-    <textarea name="description" placeholder="Problem Description" required></textarea>
+            <div style="display:flex; flex-direction:column; gap:12px;">
 
-    <input name="module" placeholder="Module">
+                <input name="sl_no" placeholder="Sl No" required>
 
-    <input name="sub_module" placeholder="Sub Module">
+                <textarea name="description" placeholder="Problem Description" required style="min-height:100px;"></textarea>
 
-    <input name="product" placeholder="Product">
+                <input name="module" placeholder="Module">
 
-    <textarea name="resolution" placeholder="Resolution"></textarea>
+                <input name="sub_module" placeholder="Sub Module">
 
-    <select name="status" required>
-        <option value="">Select Status</option>
-        <option value="To Do">To Do</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Done">Done</option>
-    </select>
+                <input name="product" placeholder="Product">
 
-    <select name="priority" required>
-        <option value="">Select Priority</option>
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-    </select>
+                <textarea name="resolution" placeholder="Resolution" style="min-height:100px;"></textarea>
 
-    <!-- ✅ TAGS -->
-    <label>Tag:</label>
-    <select name="tags">
-        <option value="">None</option>
-        <option value="Bug">Bug</option>
-        <option value="Feature">Feature</option>
-        <option value="UI">UI</option>
-        <option value="Backend">Backend</option>
-        <option value="Performance">Performance</option>
-        <option value="Security">Security</option>
-    </select>
+            </div>
+        </div>
 
-    <input type="hidden" name="owner_browser_id" id="bid">
+        <div class="card">
+            <h3 style="margin-top:0;">Attachment</h3>
 
-    <br><br>
-    <button type="submit">Save Issue</button>
+            <input type="file" name="file">
+        </div>
+
+    </div>
+
+    <!-- RIGHT: META -->
+    <div>
+
+        <div class="card" style="margin-bottom:16px;">
+            <h3 style="margin-top:0;">Properties</h3>
+
+            <div style="display:flex; flex-direction:column; gap:12px;">
+
+                <select name="status" required>
+                    <option value="">Select Status</option>
+                    <option value="To Do">To Do</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Done">Done</option>
+                </select>
+
+                <select name="priority" required>
+                    <option value="">Select Priority</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+
+                <select name="tags">
+                    <option value="">Tag (Optional)</option>
+                    <option value="Bug">Bug</option>
+                    <option value="Feature">Feature</option>
+                    <option value="UI">UI</option>
+                    <option value="Backend">Backend</option>
+                    <option value="Performance">Performance</option>
+                    <option value="Security">Security</option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <button type="submit" style="width:100%; padding:12px; font-size:16px;">
+                Create Issue
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<input type="hidden" name="owner_browser_id" id="bid">
 
 </form>
-</div>
 
 <script>
 document.getElementById("bid").value = localStorage.getItem("BID");
 </script>
+
 {% endblock %}
