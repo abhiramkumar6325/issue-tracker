@@ -127,16 +127,6 @@ body {
     background: var(--sidebar-hover);
 }
 
-.nav-item.admin {
-    color: #FFD666;
-}
-
-.sidebar-divider {
-    height: 1px;
-    background: rgba(255,255,255,0.1);
-    margin: 10px 0;
-}
-
 .sidebar.collapsed .brand-text,
 .sidebar.collapsed .nav-text {
     display: none;
@@ -152,12 +142,14 @@ body {
 }
 
 /* ================== TOPBAR ================== */
+
 .mobile-menu-btn {
     display: none;
-    font-size: 22px;
+    font-size: 24px;
     background: transparent;
     border: none;
     cursor: pointer;
+    color: var(--text-main); /* 🔥 FIX: make visible */
 }
 
 .topbar {
@@ -317,11 +309,21 @@ button {
     border-radius: 8px;
     cursor: pointer;
 }
+
 /* ================== MOBILE RESPONSIVE ================== */
 
 @media (max-width: 768px) {
 
-    /* Hide sidebar by default on mobile */
+    .mobile-menu-btn {
+        display: block !important;  /* 🔥 FIX */
+    }
+
+    /* Hide sidebar collapse button on mobile */
+    .sidebar .collapse-btn {
+        display: none;
+    }
+
+    /* Hide sidebar by default */
     .sidebar {
         position: fixed;
         left: -260px;
@@ -335,22 +337,10 @@ button {
         left: 0;
     }
 
-    /* Main area takes full width */
-    .main-area {
-        width: 100%;
-    }
-
-    /* Topbar center search smaller */
     .search-form input {
         width: 180px;
     }
 
-    /* Hide text, keep icons */
-    .nav-text {
-        display: inline;
-    }
-
-    /* Add overlay when sidebar open */
     .mobile-overlay {
         position: fixed;
         inset: 0;
@@ -362,11 +352,4 @@ button {
     .mobile-overlay.show {
         display: block;
     }
-    
 }
-@media (max-width: 768px) {
-    .mobile-menu-btn {
-        display: block;
-    }
-}
-
